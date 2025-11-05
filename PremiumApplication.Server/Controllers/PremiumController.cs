@@ -28,10 +28,12 @@ namespace PremiumApplication.Server.Controllers
             {
                 return BadRequest("fill all required values in valid format");
             }
+
             if(!_factorRating.TryGetValue(request.Occupation.Trim(), out decimal factor))
             {
                 return BadRequest("Invalid Occupation");
             }
+
             decimal premium = (request.DeathSumInsured * factor * request.AgeNextBirthday) / 1000 * 12;
 
             return Ok(new PremiumResponse 
